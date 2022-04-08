@@ -6,3 +6,5 @@ little example app to pratice step by step creation of a spring-boot service wri
 * [Step1](TODO%20APP%20-%20Step1.pdf)
 * [Step2](TODO%20APP%20-%20Step2.pdf)
 * [Step3](TODO%20APP%20-%20Step3.pdf)
+* [Step4](TODO%20APP%20-%20Step%204.pdf)
+* [Step5](TODO%20APP%20-%20Step%205.pdf)
