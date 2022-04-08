@@ -15,4 +15,8 @@ class TodoEntity(
     var completed: Boolean,
 )
 
-interface TodoRepository: JpaRepository<TodoEntity, Int>
+interface TodoRepository: JpaRepository<TodoEntity, Int> {
+    fun findAllByCompleted(completed: Boolean): List<TodoEntity>
+    fun deleteAllByCompleted(completed: Boolean)
+    fun findByTaskIsContainingIgnoreCase(partialTask: String): List<TodoEntity>
+}

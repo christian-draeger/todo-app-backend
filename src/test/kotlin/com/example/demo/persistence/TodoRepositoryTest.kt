@@ -26,6 +26,25 @@ class TodoRepositoryTest(
     )
 
     @Test
+    fun `can get all completed todos`() {
+        todoRepository.saveAll(testData)
+        val completed = todoRepository.findAllByCompleted(true)
+
+        Assertions.assertThat(completed.map { it.task }).containsExactly("cleaning up")
+    }
+
+    @Test
+    fun `can get all incomplete todos`() {
+        val testData = todoRepository.saveAll(testData)
+        val completed = todoRepository.findAllByCompleted(false)
+
+        Assertions.assertThat(completed.map { it.task }).containsExactly(
+            "cooking a meal",
+            "coding kotlin"
+        )
+    }
+
+    @Test
     fun `can read a todo`() {
         val testData = todoRepository.saveAll(testData)
 
@@ -60,5 +79,24 @@ class TodoRepositoryTest(
 
         val updatedTodo = todoRepository.findByIdOrNull(todoEntity.id)
         Assertions.assertThat(updatedTodo?.completed).isTrue
+    }
+
+    @Test
+    fun `can get all todos`() {
+        val testData = todoRepository.saveAll(testData)
+
+        val allTodos = todoRepository.findAll()
+        Assertions.assertThat(allTodos).isEqualTo(testData)
+    }
+
+    @Test
+    fun `can case insensitive search todos by partial task value`() {
+        val testData = todoRepository.saveAll(testData)
+
+        val hits = todoRepository.findByTaskIsContainingIgnoreCase("CO")
+        Assertions.assertThat(hits.map { it.task }).containsExactly(
+            "cooking a meal",
+            "coding kotlin"
+        )
     }
 }
