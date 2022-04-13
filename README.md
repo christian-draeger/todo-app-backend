@@ -3,8 +3,9 @@
 little example app to pratice step by step creation of a spring-boot service written in kotlin.
 
 ## Exercises
-* [Step1](TODO%20APP%20-%20Step1.pdf)
-* [Step2](TODO%20APP%20-%20Step2.pdf)
-* [Step3](TODO%20APP%20-%20Step3.pdf)
-* [Step4](TODO%20APP%20-%20Step%204.pdf)
-* [Step5](TODO%20APP%20-%20Step%205.pdf)
+* [Step1 - create project](TODO%20APP%20-%20Step1.pdf)
+* [Step2 - configure Database and add JPA repository](TODO%20APP%20-%20Step2.pdf)
+* [Step3 - test JPA repository](TODO%20APP%20-%20Step3.pdf)
+* [Step4 - add custom JPA queries and add service layer](TODO%20APP%20-%20Step%204.pdf)
+* [Step5 - add REST controllers](TODO%20APP%20-%20Step%205.pdf)
+* [Step6 - controller error handling](TODO%20APP%20-%20Step%206.pdf)
