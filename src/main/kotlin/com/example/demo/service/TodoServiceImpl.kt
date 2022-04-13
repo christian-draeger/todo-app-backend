@@ -37,6 +37,6 @@ class TodoServiceImpl(
     }
 
     override fun search(partialTask: String): List<TodoEntity> {
-        return todoRepository.findByTaskIsContainingIgnoreCase(partialTask)
+        return todoRepository.findAllByTaskContainsIgnoreCase(partialTask)
     }
 }

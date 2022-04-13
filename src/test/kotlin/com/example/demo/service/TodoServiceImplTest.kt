@@ -87,7 +87,7 @@ class TodoServiceImplTest(
     @Test
     fun `can search todos by partial task`() {
         val aTodo = aTodo()
-        every { todoRepository.findByTaskIsContainingIgnoreCase(any()) } returns listOf(aTodo)
+        every { todoRepository.findAllByTaskContainsIgnoreCase(any()) } returns listOf(aTodo)
 
         val result = todoService.search("something")
         assertThat(result).containsExactly(aTodo)

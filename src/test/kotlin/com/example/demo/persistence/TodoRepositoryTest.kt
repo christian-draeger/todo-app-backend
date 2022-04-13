@@ -93,7 +93,7 @@ class TodoRepositoryTest(
     fun `can case insensitive search todos by partial task value`() {
         val testData = todoRepository.saveAll(testData)
 
-        val hits = todoRepository.findByTaskIsContainingIgnoreCase("CO")
+        val hits = todoRepository.findAllByTaskContainsIgnoreCase("CO")
         Assertions.assertThat(hits.map { it.task }).containsExactly(
             "cooking a meal",
             "coding kotlin"

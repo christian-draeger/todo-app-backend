@@ -10,6 +10,7 @@ class TodoEntity(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int = 0,
 
+    @Column(name = "task")
     var task: String,
 
     var completed: Boolean,
@@ -25,5 +26,5 @@ interface TodoRepository: JpaRepository<TodoEntity, Int> {
      * will generate SQL-query behind the scenes:
      * select * from todo where upper(task) like upper(?) escape ?
      */
-    fun findByTaskIsContainingIgnoreCase(partialTask: String): List<TodoEntity>
+    fun findAllByTaskContainsIgnoreCase(task: String): List<TodoEntity>
 }
