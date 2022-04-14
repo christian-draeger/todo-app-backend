@@ -51,7 +51,6 @@ class TodoServiceImplTest(
 
     @Test
     fun `will throw if trying to get todo by id that not exists`() {
-        val aTestTodo = aTodo()
         every { todoRepository.findByIdOrNull(4711) } returns null
 
         Assertions.assertThrows(TodoNotFoundException::class.java) {
