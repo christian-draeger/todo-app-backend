@@ -57,6 +57,14 @@ class TodoControllerTest(
     }
 
     @Test
+    fun `will return 404 on unknown task id requested`() {
+        mockMvc.get("/todo/1337")
+            .andExpect {
+                status { isNotFound() } // check if status is 404 (not found)
+            }
+    }
+
+    @Test
     fun `can get all todo`() {
         todoRepository.saveAll(testData)
 

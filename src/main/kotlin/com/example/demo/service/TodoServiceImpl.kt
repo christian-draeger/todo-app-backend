@@ -1,5 +1,6 @@
 package com.example.demo.service
 
+import com.example.demo.common.TodoNotFoundException
 import com.example.demo.persistence.TodoEntity
 import com.example.demo.persistence.TodoRepository
 import org.springframework.data.repository.findByIdOrNull
@@ -14,14 +15,14 @@ class TodoServiceImpl(
     }
 
     override fun removeById(id: Int) {
-        with(todoRepository.findByIdOrNull(id)) {
-            requireNotNull(this) { "could not find todo with id '$id'" }
+        todoRepository.findByIdOrNull(id)?.run {
             todoRepository.delete(this)
-        }
+        } ?: throw TodoNotFoundException(id)
+
     }
     override fun getById(id: Int): TodoEntity {
         return todoRepository.findByIdOrNull(id)
-            ?: throw IllegalArgumentException("could not find todo with id '$id'")
+            ?: throw TodoNotFoundException(id)
     }
 
     override fun removeAllCompleted() {
