@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.delete
@@ -108,13 +109,31 @@ class TodoControllerTest(
     }
 
     @Test
-    fun `can put todo`() {
+    fun `can add new todo`() {
         mockMvc.put("/todo") {
             contentType = MediaType.APPLICATION_JSON
             content = TodoRequest(task = "test").asJsonString()
         }.andExpect {
             status { isOk() }
         }
+    }
+
+    @Test
+    fun `can update todo`() {
+        val anExistingTodoId = todoRepository.saveAll(testData).random().id
+
+        mockMvc.put("/todo") {
+            contentType = MediaType.APPLICATION_JSON
+            content = TodoRequest(
+                id = anExistingTodoId,
+                task = "check if updating a task works"
+            ).asJsonString()
+        }.andExpect {
+            status { isOk() }
+        }
+
+        val updatedTodo = todoRepository.findByIdOrNull(anExistingTodoId)
+        Assertions.assertThat(updatedTodo?.task).isEqualTo("check if updating a task works")
     }
 
     private fun TodoRequest.asJsonString() =

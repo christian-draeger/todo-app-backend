@@ -43,11 +43,19 @@ class TodoController(
     fun putTodo(
         @RequestBody todoRequest: TodoRequest
     ) {
-        todoService.createOrUpdate(todoRequest.toEntity())
+        val todo = todoRequest.id?.let {
+            todoService.getById(it).apply {
+                task = todoRequest.task
+                completed = todoRequest.completed
+            }
+        } ?: todoRequest.toEntity()
+
+        todoService.createOrUpdate(todo)
     }
 }
 
 data class TodoRequest(
+    val id: Int? = null,
     val task: String,
     val completed: Boolean = false
 ) {
