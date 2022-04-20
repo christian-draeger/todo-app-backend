@@ -2,6 +2,7 @@ package com.example.demo.controller
 
 import com.example.demo.persistence.TodoEntity
 import com.example.demo.service.TodoService
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -17,14 +18,17 @@ class TodoController(
     private val todoService: TodoService
 ) {
     @GetMapping("/all")
-    fun getAll() =
-        todoService.getAll().toResponse()
+    fun getAll() = ResponseEntity
+        .ok()
+        .body(todoService.getAll().toResponse())
 
     @GetMapping
     fun search(
         @RequestParam q: String
-    ) =
-        todoService.search(q).toResponse()
+    ): ResponseEntity<List<TodoResponse>> = when (q) {
+        "magic" -> ResponseEntity.status(418).build()
+        else -> ResponseEntity.ok().body(todoService.search(q).toResponse())
+    }
 
     @GetMapping("/{id}")
     fun getOneTodo(
@@ -42,7 +46,7 @@ class TodoController(
     @PutMapping
     fun putTodo(
         @RequestBody todoRequest: TodoRequest
-    ) {
+    ): ResponseEntity<Unit> {
         val todo = todoRequest.id?.let {
             todoService.getById(it).apply {
                 task = todoRequest.task
@@ -51,6 +55,7 @@ class TodoController(
         } ?: todoRequest.toEntity()
 
         todoService.createOrUpdate(todo)
+        return ResponseEntity.status(201).build()
     }
 }
 
@@ -70,7 +75,6 @@ data class TodoResponse(
     val task: String,
     val completed: Boolean,
 )
-fun TodoEntity.toResponse() =
-    TodoResponse(id, task,completed)
-fun List<TodoEntity>.toResponse() =
-    map {it.toResponse()}
+
+fun TodoEntity.toResponse() = TodoResponse(id, task,completed)
+fun List<TodoEntity>.toResponse() = map { it.toResponse() }

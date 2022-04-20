@@ -114,7 +114,7 @@ class TodoControllerTest(
             contentType = MediaType.APPLICATION_JSON
             content = TodoRequest(task = "test").asJsonString()
         }.andExpect {
-            status { isOk() }
+            status { isCreated() }
         }
     }
 
@@ -129,7 +129,7 @@ class TodoControllerTest(
                 task = "check if updating a task works"
             ).asJsonString()
         }.andExpect {
-            status { isOk() }
+            status { isCreated() }
         }
 
         val updatedTodo = todoRepository.findByIdOrNull(anExistingTodoId)
