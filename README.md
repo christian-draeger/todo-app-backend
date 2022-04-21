@@ -11,5 +11,5 @@ little example app to pratice step by step creation of a spring-boot service wri
 * [Step6 - controller error handling](TODO%20APP%20-%20Step%206.pdf)
 * [Step7 - controller with custom response status](TODO%20APP%20-%20Step%207.pdf)
 * [Step Bugfix - can update todo via rest endpoint](TODO%20APP%20-%20Step%20Bugfix1.pdf)
-* [Step8 - JPA auditing entites](TODO%20APP%20-%20Step%208.pdf)
+* [Step8 - JPA auditing entities](TODO%20APP%20-%20Step%208.pdf)
 * [Step9 - use Scheduler](TODO%20APP%20-%20Step%209.pdf)
