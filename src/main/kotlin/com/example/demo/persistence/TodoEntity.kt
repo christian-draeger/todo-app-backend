@@ -15,7 +15,7 @@ class TodoEntity(
     var task: String,
 
     var completed: Boolean,
-)
+): AuditingEntity()
 
 interface TodoRepository: JpaRepository<TodoEntity, Int> {
     // these are functions that follow a certain naming convention to automatically generate SQL queries from them

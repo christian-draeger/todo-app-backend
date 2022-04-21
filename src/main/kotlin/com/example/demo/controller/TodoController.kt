@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import java.util.Date
 
 @RestController
 @RequestMapping("/todo")
@@ -74,7 +75,9 @@ data class TodoResponse(
     val id: Int,
     val task: String,
     val completed: Boolean,
+    val created: Date,
+    val lastUpdated: Date
 )
 
-fun TodoEntity.toResponse() = TodoResponse(id, task,completed)
+fun TodoEntity.toResponse() = TodoResponse(id, task,completed, createdDate, modifiedDate)
 fun List<TodoEntity>.toResponse() = map { it.toResponse() }
