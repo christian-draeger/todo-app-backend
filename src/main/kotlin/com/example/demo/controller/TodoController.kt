@@ -4,6 +4,7 @@ import com.example.demo.persistence.TodoEntity
 import com.example.demo.service.TodoService
 import com.fasterxml.jackson.annotation.JsonInclude
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -49,6 +50,7 @@ class TodoController(
     fun putTodo(
         @RequestBody todoRequest: TodoRequest
     ): ResponseEntity<Unit> {
+
         val todo = todoRequest.id?.let {
             todoService.getById(it).apply {
                 task = todoRequest.task
