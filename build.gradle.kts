@@ -6,10 +6,20 @@ plugins {
 	kotlin("jvm") version "1.6.10"
 	kotlin("plugin.spring") version "1.6.10"
 	kotlin("plugin.jpa") version "1.6.10"
+	id("com.bmuschko.docker-spring-boot-application") version "7.3.0"
+}
+
+docker {
+	springBootApplication {
+		baseImage.set("azul/zulu-openjdk-alpine:16-jre")
+		maintainer.set(rootProject.name)
+		images.set(setOf("${rootProject.name}:latest"))
+		ports.set(setOf(8080))
+		jvmArgs.set(listOf("-Xmx2048m"))
+	}
 }
 
 group = "com.example"
-version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
