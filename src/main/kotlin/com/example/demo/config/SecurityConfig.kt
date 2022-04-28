@@ -10,7 +10,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories
 @EnableWebSecurity
 class SecurityConfig : WebSecurityConfigurerAdapter() {
 
-    override fun configure(http: HttpSecurity?) {
+    override fun configure(http: HttpSecurity) {
         http {
             csrf { disable() }
             httpBasic {}
